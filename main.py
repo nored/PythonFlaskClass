@@ -4,11 +4,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
-
-@app.route('/greet')
-def greet():
-    return f"Hello, {request.args['name']}!"
+    if 'name' in request.args:
+        name = request.args['name']
+    else:
+        name = None
+    return render_template('index.html', name=name)
 
 if __name__ == '__main__':
     app.run() 
